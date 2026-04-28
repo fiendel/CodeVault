@@ -36,10 +36,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.zeroknowledgeinteractive.codevault.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -94,10 +97,10 @@ fun AddFormScreen(
         topBar = {
             Surface(color = MaterialTheme.colorScheme.surface, tonalElevation = 2.dp) {
                 TopAppBar(
-                    title = { Text(if (isEditMode) "Edit snippet" else "New snippet") },
+                    title = { Text(if (isEditMode) stringResource(R.string.edit_snippet) else stringResource(R.string.new_snippet)) },
                     navigationIcon = {
                         TextButton(onClick = { navController.navigate(SNIPPET_LIST_SCREEN) }) {
-                            Text("Cancel")
+                            Text(stringResource(R.string.cancel))
                         }
                     }
                 )
@@ -126,21 +129,21 @@ fun AddFormScreen(
                     verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     Text(
-                        text = if (isEditMode) "Editor session" else "New file",
+                        text = if (isEditMode) stringResource(R.string.editor_session) else stringResource(R.string.new_file),
                         style = MaterialTheme.typography.labelLarge,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Text(
                         text = if (isEditMode) {
-                            "Modify metadata and code, then save changes back to the workspace."
+                            stringResource(R.string.edit_snippet_description)
                         } else {
-                            "Create a labeled snippet with consistent language metadata and a code-first layout."
+                            stringResource(R.string.new_snippet_description)
                         },
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        AssistChip(onClick = {}, label = { Text(if (isEditMode) "Editing" else "Creating") })
+                        AssistChip(onClick = {}, label = { Text(if (isEditMode) stringResource(R.string.editing) else stringResource(R.string.creating)) })
                         if (language.isNotBlank()) {
                             AssistChip(onClick = {}, label = { Text(language) })
                         }
@@ -163,7 +166,7 @@ fun AddFormScreen(
                         value = title,
                         onValueChange = { title = it },
                         modifier = Modifier.fillMaxWidth(),
-                        label = { Text("File name") },
+                        label = { Text(stringResource(R.string.file_name)) },
                         singleLine = true
                     )
 
@@ -178,7 +181,7 @@ fun AddFormScreen(
                             modifier = Modifier
                                 .menuAnchor()
                                 .fillMaxWidth(),
-                            label = { Text("Language mode") },
+                            label = { Text(stringResource(R.string.language_mode)) },
                             singleLine = true,
                             trailingIcon = {
                                 ExposedDropdownMenuDefaults.TrailingIcon(expanded = languageExpanded)
@@ -205,7 +208,7 @@ fun AddFormScreen(
                         value = description,
                         onValueChange = { description = it },
                         modifier = Modifier.fillMaxWidth(),
-                        label = { Text("Notes") },
+                        label = { Text(stringResource(R.string.notes)) },
                         minLines = 3
                     )
                 }
@@ -213,26 +216,26 @@ fun AddFormScreen(
 
             Surface(
                 shape = RoundedCornerShape(14.dp),
-                color = Color(0xFF111827)
+                color = colorResource(R.color.editor_background)
             ) {
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(Color(0xFF0B1220))
+                            .background(colorResource(R.color.editor_header_background))
                             .padding(horizontal = 12.dp, vertical = 9.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = language.ifBlank { "plaintext" }.lowercase(),
+                            text = language.ifBlank { stringResource(R.string.plaintext) }.lowercase(),
                             style = MaterialTheme.typography.labelMedium,
-                            color = Color(0xFFAFC3DB)
+                            color = colorResource(R.color.editor_text_secondary)
                         )
                         Text(
-                            text = "editor",
+                            text = stringResource(R.string.editor),
                             style = MaterialTheme.typography.labelSmall,
-                            color = Color(0xFF74839A)
+                            color = colorResource(R.color.editor_text_meta)
                         )
                     }
 
@@ -243,21 +246,21 @@ fun AddFormScreen(
                             .fillMaxWidth()
                             .height(260.dp)
                             .padding(12.dp),
-                        label = { Text("Code", color = Color(0xFF8FA2BB)) },
+                        label = { Text(stringResource(R.string.code), color = colorResource(R.color.editor_text_hint)) },
                         singleLine = false,
                         maxLines = 20,
                         textStyle = MaterialTheme.typography.bodyMedium.copy(
                             fontFamily = FontFamily.Monospace,
-                            color = Color(0xFFE5EDF7)
+                            color = colorResource(R.color.editor_text_primary)
                         ),
                         colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = Color(0xFF2F6FED),
-                            unfocusedBorderColor = Color(0xFF2A3547),
-                            focusedContainerColor = Color(0xFF111827),
-                            unfocusedContainerColor = Color(0xFF111827),
-                            cursorColor = Color(0xFF99B8FF),
-                            focusedTextColor = Color(0xFFE5EDF7),
-                            unfocusedTextColor = Color(0xFFE5EDF7)
+                            focusedBorderColor = MaterialTheme.colorScheme.primary,
+                            unfocusedBorderColor = colorResource(R.color.editor_border),
+                            focusedContainerColor = colorResource(R.color.editor_background),
+                            unfocusedContainerColor = colorResource(R.color.editor_background),
+                            cursorColor = MaterialTheme.colorScheme.primary,
+                            focusedTextColor = colorResource(R.color.editor_text_primary),
+                            unfocusedTextColor = colorResource(R.color.editor_text_primary)
                         )
                     )
                 }
@@ -303,7 +306,7 @@ fun AddFormScreen(
                         enabled = canSave,
                         shape = RoundedCornerShape(10.dp)
                     ) {
-                        Text(if (isEditMode) "Update snippet" else "Save snippet")
+                        Text(if (isEditMode) stringResource(R.string.update_snippet) else stringResource(R.string.save_snippet))
                     }
 
                     if (isEditMode && editingSnippet != null) {
@@ -315,7 +318,7 @@ fun AddFormScreen(
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Text(
-                                text = "Delete snippet",
+                                text = stringResource(R.string.delete_snippet),
                                 color = MaterialTheme.colorScheme.error
                             )
                         }

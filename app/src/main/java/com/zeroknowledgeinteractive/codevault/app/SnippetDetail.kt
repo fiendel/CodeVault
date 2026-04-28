@@ -23,11 +23,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.zeroknowledgeinteractive.codevault.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,15 +57,15 @@ fun SnippetDetail(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     TextButton(onClick = { navController.navigate(SNIPPET_LIST_SCREEN) }) {
-                        Text("Back")
+                        Text(stringResource(R.string.back))
                     }
                     Text(
-                        text = "Snippet details",
+                        text = stringResource(R.string.snippet_details),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold
                     )
                     TextButton(onClick = { navController.navigate("$EDIT_FORM/$snippetId") }) {
-                        Text("Edit")
+                        Text(stringResource(R.string.edit))
                     }
                 }
             }
@@ -105,7 +108,7 @@ fun SnippetDetail(
                                 color = MaterialTheme.colorScheme.surfaceVariant
                             ) {
                                 Text(
-                                    text = "read only",
+                                    text = stringResource(R.string.read_only),
                                     modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
                                     style = MaterialTheme.typography.labelLarge,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -115,7 +118,7 @@ fun SnippetDetail(
                         if (snippet.description.isNotBlank()) {
                             Spacer(modifier = Modifier.height(16.dp))
                             Text(
-                                text = "Notes",
+                                text = stringResource(R.string.notes),
                                 style = MaterialTheme.typography.labelLarge,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -130,26 +133,26 @@ fun SnippetDetail(
 
                 Surface(
                     shape = RoundedCornerShape(14.dp),
-                    color = Color(0xFF111827)
+                    color = colorResource(R.color.editor_background)
                 ) {
                     Column(modifier = Modifier.fillMaxWidth()) {
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .background(Color(0xFF0B1220))
+                                .background(colorResource(R.color.editor_header_background))
                                 .padding(horizontal = 12.dp, vertical = 9.dp),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = snippet.language.ifBlank { "plaintext" }.lowercase(),
+                                text = snippet.language.ifBlank { stringResource(R.string.plaintext) }.lowercase(),
                                 style = MaterialTheme.typography.labelMedium,
-                                color = Color(0xFFAFC3DB)
+                                color = colorResource(R.color.editor_text_secondary)
                             )
                             Text(
-                                text = "preview",
+                                text = stringResource(R.string.preview),
                                 style = MaterialTheme.typography.labelSmall,
-                                color = Color(0xFF74839A)
+                                color = colorResource(R.color.editor_text_meta)
                             )
                         }
                         Box(
@@ -166,14 +169,14 @@ fun SnippetDetail(
                                 ),
                                 fontFamily = FontFamily.Monospace,
                                 style = MaterialTheme.typography.bodyMedium,
-                                color = Color(0xFFE5EDF7)
+                                color = colorResource(R.color.editor_text_primary)
                             )
                         }
                     }
                 }
             } else {
                 Text(
-                    text = "Snippet not found",
+                    text = stringResource(R.string.snippet_not_found),
                     style = MaterialTheme.typography.bodyLarge
                 )
             }

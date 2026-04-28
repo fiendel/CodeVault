@@ -34,12 +34,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.zeroknowledgeinteractive.codevault.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -79,12 +82,12 @@ fun SnippetListScreen(
                         Spacer(modifier = Modifier.width(10.dp))
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
-                                text = "CodeVault",
+                                text = stringResource(R.string.code_vault_brand),
                                 style = MaterialTheme.typography.titleLarge,
                                 fontWeight = FontWeight.SemiBold
                             )
                             Text(
-                                text = "Snippet workspace",
+                                text = stringResource(R.string.snippet_workspace),
                                 style = MaterialTheme.typography.labelMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -92,7 +95,7 @@ fun SnippetListScreen(
                         IconButton(onClick = { navController.navigate(SETTINGS_SCREEN) }) {
                             Icon(
                                 Icons.Default.Settings,
-                                contentDescription = "Settings",
+                                contentDescription = stringResource(R.string.settings),
                                 tint = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
@@ -122,12 +125,12 @@ fun SnippetListScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = if (snippets.isEmpty()) "No files in workspace" else "${snippets.size} files indexed",
+                                text = if (snippets.isEmpty()) stringResource(R.string.no_files_in_workspace) else stringResource(R.string.files_indexed, snippets.size),
                                 style = MaterialTheme.typography.labelLarge,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                             Text(
-                                text = "Tap to inspect  Long press to edit",
+                                text = stringResource(R.string.snippet_list_hints),
                                 style = MaterialTheme.typography.labelMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -147,7 +150,7 @@ fun SnippetListScreen(
                 ) {
                     Text("+", style = MaterialTheme.typography.titleMedium)
                     Spacer(modifier = Modifier.width(6.dp))
-                    Text("New", style = MaterialTheme.typography.labelLarge)
+                    Text(stringResource(R.string.new_btn), style = MaterialTheme.typography.labelLarge)
                 }
             }
         }
@@ -183,13 +186,13 @@ fun SnippetListScreen(
                         }
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(
-                            text = "No snippets in workspace",
+                            text = stringResource(R.string.no_files_in_workspace),
                             style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.SemiBold
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = "Create a snippet to start building a searchable personal code vault.",
+                            text = stringResource(R.string.no_snippets_message),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -197,7 +200,7 @@ fun SnippetListScreen(
                 }
                 Spacer(modifier = Modifier.height(20.dp))
                 Button(onClick = { navController.navigate(ADD_FORM) }) {
-                    Text("Create snippet")
+                    Text(stringResource(R.string.create_snippet_btn))
                 }
             }
         } else {
@@ -286,33 +289,33 @@ fun SnippetCard(
                 Surface(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(10.dp),
-                    color = Color(0xFF111827)
+                    color = colorResource(R.color.editor_background)
                 ) {
                     Column(modifier = Modifier.fillMaxWidth()) {
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .background(Color(0xFF0B1220))
+                                .background(colorResource(R.color.editor_header_background))
                                 .padding(horizontal = 10.dp, vertical = 8.dp),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = snippet.language.ifBlank { "plaintext" }.lowercase(),
+                                text = snippet.language.ifBlank { stringResource(R.string.plaintext) }.lowercase(),
                                 style = MaterialTheme.typography.labelSmall,
-                                color = Color(0xFF9FB3C8)
+                                color = colorResource(R.color.editor_text_secondary)
                             )
                             Text(
-                                text = "preview",
+                                text = stringResource(R.string.preview),
                                 style = MaterialTheme.typography.labelSmall,
-                                color = Color(0xFF6B7A90)
+                                color = colorResource(R.color.editor_text_meta_alt)
                             )
                         }
                         Text(
                             text = snippet.code,
                             modifier = Modifier.padding(10.dp),
                             style = MaterialTheme.typography.bodySmall,
-                            color = Color(0xFFE5EDF7),
+                            color = colorResource(R.color.editor_text_primary),
                             maxLines = 4,
                             overflow = TextOverflow.Ellipsis,
                             fontFamily = FontFamily.Monospace
