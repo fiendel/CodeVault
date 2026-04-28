@@ -1,0 +1,31 @@
+package com.zeroknowledgeinteractive.codevault.ui.theme
+
+import androidx.compose.ui.graphics.Color
+
+val VaultPrimaryLight = Color(0xFF2F6FED)
+val VaultOnPrimaryLight = Color(0xFFFFFFFF)
+val VaultPrimaryContainerLight = Color(0xFFDCE7FF)
+val VaultOnPrimaryContainerLight = Color(0xFF001A43)
+val VaultSecondaryLight = Color(0xFF4C5B7A)
+val VaultOnSecondaryLight = Color(0xFFFFFFFF)
+val VaultBackgroundLight = Color(0xFFF4F6FA)
+val VaultOnBackgroundLight = Color(0xFF151923)
+val VaultSurfaceLight = Color(0xFFF8FAFE)
+val VaultOnSurfaceLight = Color(0xFF151923)
+val VaultSurfaceVariantLight = Color(0xFFE0E5EF)
+val VaultOnSurfaceVariantLight = Color(0xFF434A58)
+val VaultOutlineLight = Color(0xFF747B8A)
+
+val VaultPrimaryDark = Color(0xFF99B8FF)
+val VaultOnPrimaryDark = Color(0xFF002B73)
+val VaultPrimaryContainerDark = Color(0xFF1545B9)
+val VaultOnPrimaryContainerDark = Color(0xFFDCE7FF)
+val VaultSecondaryDark = Color(0xFFB5C5EA)
+val VaultOnSecondaryDark = Color(0xFF1D2D49)
+val VaultBackgroundDark = Color(0xFF0E1117)
+val VaultOnBackgroundDark = Color(0xFFE4E8F1)
+val VaultSurfaceDark = Color(0xFF121722)
+val VaultOnSurfaceDark = Color(0xFFE4E8F1)
+val VaultSurfaceVariantDark = Color(0xFF1A2130)
+val VaultOnSurfaceVariantDark = Color(0xFFB7C0D4)
+val VaultOutlineDark = Color(0xFF596277)
